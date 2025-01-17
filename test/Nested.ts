@@ -5,6 +5,7 @@ describe("Nested", function () {
     const Nested = await ethers.getContractFactory("Nested");
     const nested = await Nested.deploy();
 
+    const typehash = ethers.keccak256(Buffer.from('Trade(Seller seller,Buyer buyer,uint256 timestamp)Buyer(address owner,uint256 price)Seller(address owner,string productName)'))
     const coder = ethers.AbiCoder.defaultAbiCoder();
     const trade = {
       seller: {
@@ -34,7 +35,6 @@ describe("Nested", function () {
     const buyerHash = ethers.keccak256(Buffer.from(buyerEncoded.slice(2), 'hex'))
 
     // Encode Trade
-    const typehash = ethers.keccak256(Buffer.from('Trade(Seller seller,Buyer buyer,uint256 timestamp)Buyer(address owner,uint256 price)Seller(address owner,string productName)'))
     const tradeEncoded = coder.encode(
       ['bytes32', 'bytes32', 'bytes32', 'uint256'],
       [typehash, sellerHash, buyerHash, trade.timestamp]
