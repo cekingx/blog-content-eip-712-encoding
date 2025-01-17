@@ -5,6 +5,7 @@ describe("Single", function () {
     const Single = await ethers.getContractFactory("Single");
     const single = await Single.deploy();
 
+    const coder = ethers.AbiCoder.defaultAbiCoder();
     const typehash = ethers.keccak256(Buffer.from('Offer(address owner,string name,uint256 price)'))
     const offer = {
       owner: '0x16f750B6bb0eeF814358773197812f2989efEEe2',
@@ -14,7 +15,6 @@ describe("Single", function () {
 
     const hashedName = ethers.keccak256(Buffer.from(offer.name))
 
-    const coder = ethers.AbiCoder.defaultAbiCoder();
     const encoded = coder.encode(
       ['bytes32', 'address', 'bytes32', 'uint256'],
       [typehash, offer.owner, hashedName, offer.price]
