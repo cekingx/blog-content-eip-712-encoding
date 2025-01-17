@@ -19,7 +19,7 @@ contract Nested {
   }
 
   function hashTrade(Trade memory trade) external pure returns(bytes32) {
-    bytes32 TRADE_TYPEHASH = keccak256(bytes('Trade(Seller seller,Buyer buyer,uint256 timestamp)Buyer(address owner,string productName)Seller(address owner,uint256 price)'));
+    bytes32 TRADE_TYPEHASH = keccak256(bytes('Trade(Seller seller,Buyer buyer,uint256 timestamp)Buyer(address owner,uint256 price)Seller(address owner,string productName)'));
 
     bytes memory encodedSeller = abi.encode(
       trade.seller.owner,

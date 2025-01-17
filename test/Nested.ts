@@ -34,7 +34,7 @@ describe("Nested", function () {
     const buyerHash = ethers.keccak256(Buffer.from(buyerEncoded.slice(2), 'hex'))
 
     // Encode Trade
-    const typehash = ethers.keccak256(Buffer.from('Trade(Seller seller,Buyer buyer,uint256 timestamp)Buyer(address owner,string productName)Seller(address owner,uint256 price)'))
+    const typehash = ethers.keccak256(Buffer.from('Trade(Seller seller,Buyer buyer,uint256 timestamp)Buyer(address owner,uint256 price)Seller(address owner,string productName)'))
     const tradeEncoded = coder.encode(
       ['bytes32', 'bytes32', 'bytes32', 'uint256'],
       [typehash, sellerHash, buyerHash, trade.timestamp]
